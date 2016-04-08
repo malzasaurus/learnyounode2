@@ -4,12 +4,14 @@ var path = require('path');
 var myFunction = function(fPath, extFilter, callback){
 	 fs.readdir(fPath, function(err, list){
 		if(err) 
-			return callback(err); 
+			return callback(err, null); 
+		var filtList = [];
 		list.forEach(function(file){
 			if(path.extname(file) === '.' + extFilter){
-				return callback(null, file);
+				filtList.push(file);
 			}
 		})
+		return callback(null, filtList)
 	})
 }
 
